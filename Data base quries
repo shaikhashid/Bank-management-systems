@@ -1,0 +1,32 @@
+create schema bank_db
+use bank_db
+create database bank
+use bank
+set autocommit=0
+-----User_Table------
+create table users(account_no INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(100),account_type VARCHAR(50),amount DECIMAL(10,2),pin VARCHAR(10))
+select * from users
+desc users
+----- Transaction_Table------
+create table transactions(id INT PRIMARY KEY AUTO_INCREMENT,account_no INT,action_type VARCHAR(20),amount DECIMAL(10,2),
+date_time DATETIME DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(account_no) REFERENCES users(account_no))
+select * from transactions
+desc transactions
+-----Admin_Table------
+CREATE TABLE admin (admin_id VARCHAR(50) PRIMARY KEY,password VARCHAR(50))
+SELECT * FROM admins
+DESC admins
+RENAME TABLE admin TO admins;
+
+-----Insert_defalut_Admin------
+INSERT INTO admin(admin_id,password) VALUES ('admin','admin123')
+insert into admin(admin_id,password) values ('narendra','narendra123')
+#SET FOREIGN_KEY_CHECKS = 0;
+
+#DROP TABLE IF EXISTS transactions;
+#DROP TABLE IF EXISTS users;
+#DROP TABLE IF EXISTS admin;
+
+#SET FOREIGN_KEY_CHECKS = 1;
+#drop database bank
+commit
